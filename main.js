@@ -37,21 +37,21 @@ const server =  createServer({
     ca: 'X509 CERTIFICATE',
 });
 
-const ws = new WebSocketServer({
+const wss = new WebSocketServer({
     server,
     backlog: 100
 });
 
-ws.on('connection', sk => {
+wss.on('connection', sk => {
 
     sk.on('error', console.error);
 
     sk.on('message', function message(data) {
-        console.log('received: %s', data);
-        sk.send(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`);
+        console.log('[%s] received: %s', sk.id, data);
+        sk.send(`[${sk.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`);
     });
 
-    setInterval(() => sk.send(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> PONG`), 10e3)
+    setInterval(() => sk.send(`[${sk.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> PONG`), 10e3)
 });
 
 server.listen(3000);
