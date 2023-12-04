@@ -8,25 +8,25 @@
           // to the `onopen` property.
           ws.onopen = function() {
 
-            const btn = document.getElementById('#send');
+            const btn = document.getElementById('send');
             btn.disabled = false;
 
             btn.addEventListener('click', () => {
-                const msg_node = document.getElementById('#message');
+                const msg_node = document.getElementById('message');
                 ws.send(msg_node.value);
                 msg_node.value = '';
             });
 
-            document.querySelector('#message').addEventListener('keydown', function (kev) {
+            document.getElementById('message').addEventListener('keydown', function (kev) {
                 if (kev.key !== 'Enter') return;
 
                 kev.preventDefault();
-                document.querySelector('#send').dispatchEvent(new Event('click'));
+                document.getElementById('send').dispatchEvent(new Event('click'));
             });
           };
 
           ws.onmessage = function(msg) {
-            document.querySelector('#messages').innerHTML += `<div>${msg.data}</div>`;
+            document.getElementById('messages').innerHTML += `<div>${msg.data}</div>`;
           };
         </script>
       </head>
