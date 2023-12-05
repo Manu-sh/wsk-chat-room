@@ -12,7 +12,12 @@
             btn.disabled = false;
 
             btn.addEventListener('click', () => {
+
                 const msg_node = document.getElementById('message');
+
+                if ((msg_node.value ?? '') === '')
+                    return;
+
                 ws.send(msg_node.value);
                 msg_node.value = '';
             });

@@ -42,6 +42,7 @@ const wss = new WebSocketServer({
     backlog: 100
 });
 
+
 wss.on('connection', sk => {
 
     sk.on('error', console.error);
@@ -51,7 +52,24 @@ wss.on('connection', sk => {
         sk.send(`[${sk.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`);
     });
 
-    setInterval(() => sk.send(`[${sk.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> PONG`), 10e3)
+    //setInterval(() => sk.send(`[${sk.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> PONG`), 10e3)
 });
+
+
+// https://nodejs.org/docs/latest-v18.x/api/tls.html#class-tlstlssocket
+server.on('upgrade', function upgrade(request, socket, head) {
+
+    // console.log(request)
+    console.log(socket)
+
+    if (1) {
+        socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+        socket.destroySoon();
+        return;
+    }
+
+});
+
+
 
 server.listen(3000);
