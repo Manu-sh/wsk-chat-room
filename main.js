@@ -38,7 +38,8 @@ const server =  createServer({
 });
 
 const wss = new WebSocketServer({
-    server,
+    //server,
+    noServer: true,
     backlog: 100
 });
 
@@ -59,14 +60,15 @@ wss.on('connection', sk => {
 // https://nodejs.org/docs/latest-v18.x/api/tls.html#class-tlstlssocket
 server.on('upgrade', function upgrade(request, socket, head) {
 
-    // console.log(request)
-    console.log(socket)
-
-    if (1) {
+    if (0) {
         socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
         socket.destroySoon();
         return;
     }
+
+    wss.handleUpgrade(request, socket, head, function done(ws) {
+        wss.emit('connection', ws, request);
+    });
 
 });
 
