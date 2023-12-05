@@ -1,7 +1,5 @@
 import {WSS} from './WSS.js'
 import WebSocket from 'ws'
-import moment from 'moment'
-
 
 export class BasicChat extends WSS {
 
@@ -29,6 +27,11 @@ export class BasicChat extends WSS {
 
                 this.emit('chat:message:received', ...[...args, sk]);
                 //this.sendAll(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`, { binary: isBinary });
+            });
+
+            sk.on('close', (...args) => {
+                delete this.wss_clients[sk.id];
+                this.emit('chat:client:disconnect', ...[...args, sk])
             });
 
         });
