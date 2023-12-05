@@ -19,15 +19,16 @@ export class BasicChat extends WSS {
             sk.id = req.headers['sec-websocket-key'];
             this.wss_clients[ sk.id ] = req;
 
-            console.log('client online [%d]', Object.keys(self.wss_clients).length);
+            //console.log('client online [%d]', Object.keys(self.wss_clients).length);
 
-            sk.on('message', (data, isBinary) => {
+            sk.on('message', (...args) => {
 
-                console.log('received: %s...', data.toString().substring(0, 10));
-                console.log('client online [%d]', Object.keys(self.wss_clients).length);
+                console.log(sk.id);
+                // console.log('received: %s...', data.toString().substring(0, 10));
+                //console.log('client online [%d]', Object.keys(self.wss_clients).length);
 
-                this.emit('chat:message', data, isBinary);
-                this.sendAll(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`, { binary: isBinary });
+                this.emit('chat:message:received', ...[...args, sk]);
+                //this.sendAll(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`, { binary: isBinary });
             });
 
         });

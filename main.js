@@ -7,8 +7,9 @@ const wss = new BasicChat();
 
 //wss.onHttpsUpgrade(() => 1);
 
-wss.on('chat:message', (a,b) => {
-    console.log(a,b)
+wss.on('chat:message:received', (data, isBinary, client) => {
+    console.log(data.toString(), isBinary)
+    wss.sendAll(`[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`, { binary: isBinary });
 })
 
 wss.https_server.listen(3000);
