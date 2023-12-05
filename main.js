@@ -1,23 +1,35 @@
 'use strict';
 import moment from 'moment';
 import {WSS} from './src/WSS.js';
+import WebSocket from 'ws';
 
 const wss = new WSS();
 
 wss.onHttpsUpgrade(() => 1);
 
 
-wss.on('connection', (sk) => {
-/*
-    wss.clients.forEach(function each(client) {
-        console.log(client.getTra);
-    });*/
+wss.on('connection', (sk,req) => {
 
-    sk.on('error', console.error);
+    /*
+    wss.clients.forEach((ws) => {
+        //ws.id = req.headers['sec-websocket-key'];
+        console.log(ws.origin);
+    });
+   */
 
-    sk.on('message', function message(data) {
+
+    sk.id = req.headers['sec-websocket-key'];
+    console.log(sk.id);
+    //console.log(atob(sk.id)) ;
+    console.log(req.headers) ;
+
+    sk.on('message', function message(data, isBinary) {
         console.log('received: %s', data);
-        sk.send(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`);
+        wss.clients.forEach(function each(client) {
+            if (client.readyState === WebSocket.OPEN)
+                client.send(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`, { binary: isBinary });
+        });
+
     });
 
 });

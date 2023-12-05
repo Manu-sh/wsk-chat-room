@@ -20,9 +20,6 @@ export class WSS extends WebSocketServer {
             ca: 'X509 CERTIFICATE',
         });
 
-
-
-
         //this.on('close', () => WSS.https_server.close())
     }
 
