@@ -27,14 +27,16 @@ export class BasicChat extends WSS {
                 console.log('client online [%d]', Object.keys(self.wss_clients).length);
 
                 this.emit('chat:message', data, isBinary);
-
-                self.clients.forEach(client => {
-                    if (client.readyState === WebSocket.OPEN)
-                        client.send(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`, { binary: isBinary });
-                });
-
+                this.sendAll(`${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`, { binary: isBinary });
             });
 
+        });
+    }
+
+    sendAll(...args) {
+        this.clients.forEach(client => {
+            if (client.readyState === WebSocket.OPEN)
+                client.send(...args);
         });
     }
 
