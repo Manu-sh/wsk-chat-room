@@ -5,7 +5,6 @@ import WebSocket from 'ws'
 export class BasicChat extends WSS {
 
     wss_clients = {};
-    #purger_interval = null;
 
     constructor(arg, onHttpsUpgrade = () => true) {
 
@@ -21,8 +20,6 @@ export class BasicChat extends WSS {
                 conn_req: req
             };
 
-            this.#setupPurger(sk);
-
             this.emit('chat:client:connected', sk, req);
 
             sk.on('message', (...args) => {
@@ -30,41 +27,13 @@ export class BasicChat extends WSS {
             });
 
             sk.on('close', (...args) => {
+                console.log(`delete ${sk.id}`)
                 delete this.wss_clients[sk.id];
                 this.emit('chat:client:disconnect', ...[...args, sk])
             });
 
         });
 
-    }
-
-    // https://www.npmjs.com/package/ws#how-to-detect-and-close-broken-connections
-    #setupPurger(sk) {
-
-        this.#purger_interval = setInterval(() => {
-            this.clients.forEach(client => {
-
-                if (client.isAlive === false) {
-                    delete this.wss_clients[client.id];
-                    return client.terminate();
-                }
-
-                client.isAlive = false;
-                client.ping();
-            });
-        }, 30_000);
-
-        sk.isAlive = true;
-        sk.on('error', console.error);
-        sk.on('pong', () => sk.isAlive = true);
-        this.on('close', (...args) => {
-            clearInterval(this.#purger_interval);
-            this.emit('chat:wss:close', ...args);
-        });
-    }
-
-    listen(...args) {
-        this.https_server.listen(...args);
     }
 
     activeClients() {
