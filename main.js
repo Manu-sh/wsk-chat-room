@@ -20,4 +20,4 @@ wss.on('chat:client:disconnect', (code, reason, client) => {
     wss.sendAll(`[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} left the chat`);
 })
 
-wss.https_server.listen(3000);
+wss.listen(3000);

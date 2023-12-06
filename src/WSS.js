@@ -4,22 +4,29 @@ import {createServer} from 'https';
 import {readFileSync} from 'fs';
 import env from './env.js';
 
+export function make_static_https(unset = false) {
+
+    if (unset === true) {
+        make_static_https.https_server.disconnect();
+        delete make_static_https.https_server;
+    }
+
+    // memoization
+    return make_static_https.https_server ??= createServer({
+        minVersion: 'TLSv1',
+        key:  readFileSync(env('WSS_KEY_PEM_PATH')),
+        cert: readFileSync(env('WSS_CRT_PEM_PATH')),
+        ca: 'X509 CERTIFICATE',
+    });
+}
 
 export class WSS extends WebSocketServer {
 
     static https_server;
 
     constructor(ws_arg) {
-
         super(Object.assign({}, {noServer: true, backlog: 100}, ws_arg));
-
-        this.https_server = createServer({
-            minVersion: 'TLSv1',
-            key:  readFileSync(env('WSS_KEY_PEM_PATH')),
-            cert: readFileSync(env('WSS_CRT_PEM_PATH')),
-            ca: 'X509 CERTIFICATE',
-        });
-
+        this.https_server ??= make_static_https();
         //this.on('close', () => WSS.https_server.close())
     }
 
