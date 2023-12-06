@@ -28,7 +28,7 @@ export class WSS extends WebSocketServer {
         super(Object.assign({}, {noServer: true, backlog: 100}, ws_arg));
         this.https_server ??= make_static_https();
         // this.on('connection', (...args) => this.#setupPurger(...args));
-        super.on('close', () => make_static_https(true)); // TODO: eventualmente implementare un pool
+        this.on('close', () => make_static_https(true)); // TODO: eventualmente implementare un pool
     }
 
     get getHttpsServer() { return this.https_server; }
@@ -81,7 +81,7 @@ export class WSS extends WebSocketServer {
             }
 
             super.handleUpgrade(request, socket, head, ws => {
-                super.emit('connection', ws, request);
+                this.emit('connection', ws, request);
             });
 
         });

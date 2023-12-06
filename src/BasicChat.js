@@ -11,7 +11,7 @@ export class BasicChat extends WSS {
         super(arg);
         super.onHttpsUpgrade(onHttpsUpgrade);
 
-        super.on('connection', (sk,req) => {
+        this.on('connection', (sk,req) => {
 
             sk.id = req.headers['sec-websocket-key'];
             this.wss_clients[ sk.id ] = {
