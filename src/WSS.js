@@ -7,7 +7,7 @@ import env from './env.js';
 export function make_static_https(unset = false) {
 
     if (unset === true) {
-        make_static_https.https_server.disconnect();
+        make_static_https.https_server.close();
         delete make_static_https.https_server;
     }
 
