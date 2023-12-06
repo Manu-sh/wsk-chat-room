@@ -32,12 +32,12 @@ export class WSS extends WebSocketServer {
 
     get getHttpsServer() { return this.https_server; }
 
-    onHttpsUpgrade(callback) {
+    onHttpsUpgrade(callback_predicate) {
 
         // https://nodejs.org/docs/latest-v18.x/api/tls.html#class-tlstlssocket
         this.https_server.on('upgrade', (request, socket, head) => {
 
-            const result = callback();
+            const result = callback_predicate();
 
             if (!result) {
                 socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
