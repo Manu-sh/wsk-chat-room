@@ -4,7 +4,6 @@ import {BasicChat} from './src/BasicChat.js'
 
 const wss = new BasicChat();
 
-//wss.onHttpsUpgrade(() => 1);
 wss.on('chat:client:connected', (client, req) => {
     wss.sendAll(`[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} join the chat`);
 });

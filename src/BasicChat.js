@@ -63,13 +63,9 @@ export class BasicChat extends WSS {
         });
     }
 
-
     listen(...args) {
         this.https_server.listen(...args);
     }
-
-
-    onAuthentication(callback) {}
 
     activeClients() {
         return [...this.clients[Symbol.iterator]()]

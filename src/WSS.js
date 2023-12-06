@@ -27,7 +27,7 @@ export class WSS extends WebSocketServer {
     constructor(ws_arg) {
         super(Object.assign({}, {noServer: true, backlog: 100}, ws_arg));
         this.https_server ??= make_static_https();
-        //this.on('close', () => WSS.https_server.close())
+        this.on('close', () => make_static_https(true)); // TODO: eventualmente implementare un pool
     }
 
     get getHttpsServer() { return this.https_server; }
