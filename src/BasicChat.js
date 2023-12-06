@@ -15,10 +15,15 @@ export class BasicChat extends WSS {
         this.on('connection', (sk,req) => {
 
             sk.id = req.headers['sec-websocket-key'];
-            this.wss_clients[ sk.id ] = req;
+            this.wss_clients[ sk.id ] = {
+                sk: sk,
+                conn_req: req
+            };
+
+            this.emit('chat:client:connected', sk, req);
 
             sk.on('message', (...args) => {
-                console.log(sk.id);
+                //console.log(sk.id);
                 this.emit('chat:message:received', ...[...args, sk]);
             });
 
@@ -30,12 +35,6 @@ export class BasicChat extends WSS {
         });
     }
 
-    sendAll(...args) {
-        this.clients.forEach(client => {
-            if (client.readyState === WebSocket.OPEN)
-                client.send(...args);
-        });
-    }
 
     onAuthentication(callback) {
 
@@ -43,7 +42,18 @@ export class BasicChat extends WSS {
 
     activeClients() {
         return [...this.clients[Symbol.iterator]()]
-            .reduce((carry,client) => carry + (client.readyState === WebSocket.OPEN), 0);
+            .filter(client => client.readyState === WebSocket.OPEN);
+    }
+
+    sendTo(client_id, ...args) {
+        const client = this.wss_clients[client_id]?.sk;
+        client.send(...args);
+    }
+
+    sendAll(...args) {
+        this.activeClients().forEach(client => {
+            client.send(...args);
+        });
     }
 
 }
