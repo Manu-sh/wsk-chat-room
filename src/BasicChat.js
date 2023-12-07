@@ -26,7 +26,6 @@ export class BasicChat extends WSS {
             });
 
             sk.on('close', (...args) => {
-                console.log(`delete ${sk.id}`)
                 delete this.wss_clients[sk.id];
                 this.emit('chat:client:disconnect', ...[...args, sk])
             });
