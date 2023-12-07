@@ -37,8 +37,10 @@ export class ManageChannels {
     // TODO: testami
     quitFromChannel(ch_name, client) {
         const channel = this.channels[ch_name]?.quit(client);
-        if (channel?.empty())
+        if (channel?.empty()) {
+            //console.log(`canale ${channel.name} vuoto`)
             delete this.channels[ch_name];
+        }
     }
 
     sendToChannel(ch_name, ...args) {
