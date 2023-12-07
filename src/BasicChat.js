@@ -1,6 +1,6 @@
 'use strict';
-import {WSS} from './WSS.js'
-import WebSocket from 'ws'
+import {WSS} from './WSS.js';
+import WebSocket from 'ws';
 
 export class BasicChat extends WSS {
 
@@ -14,6 +14,7 @@ export class BasicChat extends WSS {
         this.on('connection', (sk,req) => {
 
             sk.id = req.headers['sec-websocket-key'];
+            sk.channel_name = req.url;
             this.wss_clients[ sk.id ] = {
                 sk: sk,
                 conn_req: req
