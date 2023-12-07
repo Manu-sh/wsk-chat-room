@@ -1,7 +1,7 @@
     <html>
       <head>
         <script type="text/javascript">
-          const ws = new WebSocket('wss://localhost:3000');
+          const ws = new WebSocket('wss://localhost:3000<?= $_GET['channel'] ?? '/' ?>');
 
           // Browser WebSockets have slightly different syntax than `ws`.
           // Instead of EventEmitter syntax `on('open')`, you assign a callback

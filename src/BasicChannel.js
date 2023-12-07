@@ -38,8 +38,8 @@ export class BasicChannel {
     }
 
     quit(client) {
-        this.clients.delete(client);
         this.sendAll(`[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} left the chat`);
+        this.clients.delete(client);
     }
 
     *generator() {
