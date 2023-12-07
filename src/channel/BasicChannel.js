@@ -40,6 +40,11 @@ export class BasicChannel {
     quit(client) {
         this.sendAll(`[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} left the chat`);
         this.clients.delete(client);
+        return this;
+    }
+
+    empty() {
+        return !this.clients.size;
     }
 
     *generator() {

@@ -34,8 +34,11 @@ export class ManageChannels {
         return channel;
     }
 
+    // TODO: testami
     quitFromChannel(ch_name, client) {
-        this.channels[ch_name]?.quit(client);
+        const channel = this.channels[ch_name]?.quit(client);
+        if (channel?.empty())
+            delete this.channels[ch_name];
     }
 
     sendToChannel(ch_name, ...args) {
