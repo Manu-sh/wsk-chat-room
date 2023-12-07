@@ -2,6 +2,9 @@
 import moment from 'moment';
 import {ChannelChat} from './src/channel/ChannelChat.js'
 
+// TODO: Redis per la history dei messaggi?
+// TODO: Redis per la gestione dei canali?
+
 const wss = new ChannelChat({
     //path: '/ch1'
 });
