@@ -1,6 +1,6 @@
 'use strict';
 import moment from 'moment';
-import {ChannelChat} from './src/ChannelChat.js'
+import {ChannelChat} from './src/channel/ChannelChat.js'
 
 const wss = new ChannelChat({
     //path: '/ch1'
