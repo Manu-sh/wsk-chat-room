@@ -3,7 +3,6 @@ import {Channel} from './Channel.js'
 
 /*
     // TODO: weak-reference to clients?
-
     {
         'clients' => [xx, yy, zz, nn, kk]
         'ch1' => [xx, yy, zz],
