@@ -14,7 +14,7 @@ export class ChatUser {
 
     #setChannelName(channel_name) {
         const res = new URLSearchParams(channel_name.replace(ChatUser.regexp, ''));
-        this.channel_name = res.get('channel');
+        this.channel_name = res.get('channel') ?? 'general';
     }
 
 
