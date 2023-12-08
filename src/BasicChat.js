@@ -2,6 +2,8 @@
 import {WSS} from './WSS.js';
 import WebSocket from 'ws';
 
+import {ChatUser} from './user/ChatUser.js';
+
 export class BasicChat extends WSS {
 
     wss_clients = {};
@@ -13,13 +15,8 @@ export class BasicChat extends WSS {
 
         this.on('connection', (sk,req) => {
 
-            // sk.id = req.headers['sec-websocket-key']; sk.channel_name = req.url;
-
-            // TODO: mixare una classe di tipo user
-            Object.assign(sk, {
-                id: req.headers['sec-websocket-key'],
-                channel_name: req.url
-            });
+            // mixing https://www.w3docs.com/learn-javascript/mixins.html
+            Object.assign(sk, new ChatUser(req.headers['sec-websocket-key'], req.url));
 
             this.wss_clients[ sk.id ] = {
                 sk: sk,
