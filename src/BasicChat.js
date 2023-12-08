@@ -1,6 +1,8 @@
 'use strict';
-import {WSS} from './WSS.js'
-import WebSocket from 'ws'
+import {WSS} from './WSS.js';
+import WebSocket from 'ws';
+
+import {ChatUser} from './user/ChatUser.js';
 
 export class BasicChat extends WSS {
 
@@ -13,7 +15,9 @@ export class BasicChat extends WSS {
 
         this.on('connection', (sk,req) => {
 
-            sk.id = req.headers['sec-websocket-key'];
+            // mixing https://www.w3docs.com/learn-javascript/mixins.html
+            Object.assign(sk, new ChatUser(req.headers['sec-websocket-key'], req.url));
+
             this.wss_clients[ sk.id ] = {
                 sk: sk,
                 conn_req: req
