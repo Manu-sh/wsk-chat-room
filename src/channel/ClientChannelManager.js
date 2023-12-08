@@ -5,15 +5,15 @@ export class ClientChannelManager {
 
     channels = new BasicChannelsManager();
 
-    join(client) {
+    join(client) { // : void
         this.channels.joinToChannel(client.channel_name, client);
     }
 
-    quit(client) {
+    quit(client) { // : bool
         return this.channels.quitFromChannel(client.channel_name, client);
     }
 
-    change(client, channel_name) {
+    change(client, channel_name) { // : void
 
         if (client.channel_name === channel_name)
             return;

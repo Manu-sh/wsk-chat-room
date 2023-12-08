@@ -24,15 +24,16 @@ import {BasicChannel} from './BasicChannel.js'
 
 export class BasicChannelsManager {
 
+    // Map<String,BasicChannel>
     channels = {};
 
-    joinToChannel(ch_name, client) {
+    joinToChannel(ch_name, client) { // : BasicChannel
         const channel = this.channels[ch_name] ??= new BasicChannel(ch_name);
         channel.join(client);
         return channel;
     }
 
-    quitFromChannel(ch_name, client) {
+    quitFromChannel(ch_name, client) { // : bool
         const channel = this.channels[ch_name];
         if (!channel) return false;
 
@@ -41,7 +42,7 @@ export class BasicChannelsManager {
         return true;
     }
 
-    sendToChannel(ch_name, ...args) {
+    sendToChannel(ch_name, ...args) { // : void
         this.channels[ch_name]?.sendAll(...args);
     }
 

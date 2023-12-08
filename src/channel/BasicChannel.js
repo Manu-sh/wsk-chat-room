@@ -26,28 +26,28 @@ import WebSocket from 'ws';
 export class BasicChannel {
 
     name = '';
-    clients = new Map();
+    clients = new Map(); // Map<String,WebSocket>
 
     constructor(name) {
         this.name = name;
     }
 
-    join(client) {
+    join(client) { // : void
         this.clients.set(client.id, client);
         this.sendAll(`[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} join the channel ${this.name}`);
     }
 
-    quit(client) {
+    quit(client) { // : self
         this.sendAll(`[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} left the chat`);
         this.clients.delete(client.id);
         return this;
     }
 
-    empty() {
+    empty() { // : bool
         return !this.clients.size;
     }
 
-    *generator() {
+    *generator() { // : Iterator<Pair<String,WebSocket>>
         return this.clients.entries();
     }
 
