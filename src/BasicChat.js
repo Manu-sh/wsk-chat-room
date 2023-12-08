@@ -13,8 +13,14 @@ export class BasicChat extends WSS {
 
         this.on('connection', (sk,req) => {
 
-            sk.id = req.headers['sec-websocket-key'];
-            sk.channel_name = req.url;
+            // sk.id = req.headers['sec-websocket-key']; sk.channel_name = req.url;
+
+            // TODO: mixare una classe di tipo user
+            Object.assign(sk, {
+                id: req.headers['sec-websocket-key'],
+                channel_name: req.url
+            });
+
             this.wss_clients[ sk.id ] = {
                 sk: sk,
                 conn_req: req
