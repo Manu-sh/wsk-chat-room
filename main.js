@@ -5,6 +5,7 @@ import {ChannelChat} from './src/ChannelChat.js';
 // TODO: Redis per la history dei messaggi?
 // TODO: Redis per la gestione dei canali?
 
+// TODO: channel chat per default deve interagire per canali quindi fare il broadcast a quelli nel canale
 const wss = new ChannelChat({
     //path: '/ch1'
 });

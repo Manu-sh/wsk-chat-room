@@ -31,13 +31,13 @@ export class ChannelManager {
         return true;
     }
 
-    change(client, channel_name) { // : void
+    change(client, ch_name) { // : void
 
-        if (client.channel_name === channel_name)
+        if (client.channel_name === ch_name)
             return;
 
         this.quit(client);
-        client.channel_name = channel_name;
+        client.channel_name = ch_name;
         this.join(client);
     }
 
@@ -46,8 +46,10 @@ export class ChannelManager {
         this.channels[ch_name]?.sendAll(...args);
     }
 
-    count_channels() {
-        return Object.keys(this.channels).length;
+    count(ch_name) {
+        return ch_name ?
+            this.channels[ch_name]?.count() || 0
+                : Object.keys(this.channels).length;
     }
 
 }

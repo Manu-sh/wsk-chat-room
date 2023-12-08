@@ -25,12 +25,12 @@ export class Channel {
         return this;
     }
 
-    members_len() { // : number
+    count() { // : number
         return this.clients.size;
     }
 
     empty() { // : bool
-        return !this.members_len();
+        return !this.count();
     }
 
     *generator() { // : Iterator<Pair<String,WebSocket>>
