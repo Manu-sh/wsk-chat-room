@@ -26,8 +26,6 @@ export class ManageChannels {
 
     channels = {};
 
-    constructor() {}
-
     joinToChannel(ch_name, client) {
         const channel = this.channels[ch_name] ??= new BasicChannel(ch_name);
         channel.join(client);
@@ -37,10 +35,7 @@ export class ManageChannels {
     // TODO: testami
     quitFromChannel(ch_name, client) {
         const channel = this.channels[ch_name]?.quit(client);
-        if (channel?.empty()) {
-            //console.log(`canale ${channel.name} vuoto`)
-            delete this.channels[ch_name];
-        }
+        if (channel?.empty()) delete this.channels[ch_name];
     }
 
     sendToChannel(ch_name, ...args) {
