@@ -1,29 +1,11 @@
 'use strict';
 
-
-/*
-
-    ch1 -> xx
-           yy
-           zz
-
-    ch2 -> xx
-           nn
-           kk
-
-    {
-        'clients' => [xx, yy, zz, nn, kk]
-
-        // TODO: weak-reference to clients?
-        'ch1' => [xx, yy, zz],
-        'ch2' => [xx, nn, kk],
-    }
-*/
+// 'ch1' => [xx, yy, zz]
 
 import moment from 'moment'
 import WebSocket from 'ws';
 
-export class BasicChannel {
+export class Channel {
 
     name = '';
     clients = new Map(); // Map<String,WebSocket>

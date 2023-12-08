@@ -26,7 +26,7 @@ wss.on('chat:client:connected', (client, req) => {
 wss.on('chat:client:connected', (client, req) => {
 
     wss.once('chat:message:received', (data, isBinary, client) => {
-        console.log(JSON.parse(data))
+        //console.log(JSON.parse(data))
     });
 
 });
