@@ -22,7 +22,7 @@
 
 import {BasicChannel} from './BasicChannel.js'
 
-export class ManageChannels {
+export class BasicChannelsManager {
 
     channels = {};
 
@@ -32,10 +32,13 @@ export class ManageChannels {
         return channel;
     }
 
-    // TODO: testami
     quitFromChannel(ch_name, client) {
-        const channel = this.channels[ch_name]?.quit(client);
-        if (channel?.empty()) delete this.channels[ch_name];
+        const channel = this.channels[ch_name];
+        if (!channel) return false;
+
+        channel.quit(client);
+        if (channel.empty()) delete this.channels[ch_name];
+        return true;
     }
 
     sendToChannel(ch_name, ...args) {

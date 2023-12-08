@@ -24,9 +24,11 @@ wss.on('chat:message:received', (data, isBinary, client) => {
     );
 });
 
+
+// TODO: possibilità di cambiar canale senza disconnettere l'utente
 wss.on('chat:client:disconnect', (code, reason, client) => {
-    //console.log(`${client.id} quit from channel ${client.channel_name}`)
     wss.channels.quitFromChannel(client.channel_name, client);
+    client.channel_name = '/';
 });
 
 wss.listen(3000);
