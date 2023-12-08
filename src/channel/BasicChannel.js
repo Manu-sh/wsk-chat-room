@@ -43,8 +43,12 @@ export class BasicChannel {
         return this;
     }
 
+    members_len() { // : number
+        return this.clients.size;
+    }
+
     empty() { // : bool
-        return !this.clients.size;
+        return !this.members_len();
     }
 
     *generator() { // : Iterator<Pair<String,WebSocket>>

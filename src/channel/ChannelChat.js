@@ -1,10 +1,10 @@
 'use strict';
 import {BasicChat} from '../BasicChat.js'
-import {BasicChannelsManager} from './BasicChannelsManager.js'
+import {ClientChannelManager} from './ClientChannelManager.js'
 
 export class ChannelChat extends BasicChat {
 
-    channels = new BasicChannelsManager;
+    channels = new ClientChannelManager();
 
     constructor(...args) {
         super(...args);

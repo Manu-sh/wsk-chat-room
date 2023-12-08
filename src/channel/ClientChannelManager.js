@@ -23,5 +23,12 @@ export class ClientChannelManager {
         this.join(client);
     }
 
+    sendToChannel(channel_name, ...args) {
+        this.channels.sendToChannel(channel_name, ...args)
+    }
+
+    count_channels() {
+        return this.channels.count_channels();
+    }
 
 }

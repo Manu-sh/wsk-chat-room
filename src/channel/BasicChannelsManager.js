@@ -46,4 +46,8 @@ export class BasicChannelsManager {
         this.channels[ch_name]?.sendAll(...args);
     }
 
+    count_channels() {
+        return Object.keys(this.channels).length;
+    }
+
 }
