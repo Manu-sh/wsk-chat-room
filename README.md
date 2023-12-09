@@ -31,6 +31,14 @@ aggiungendo l'opzione -nodes in fondo non è più necessario
 
 ---
 
+```json
+{
+  "cmd": "login",
+  "user": "user",
+  "passwd": "1"
+}
+```
+
 join 2 channel
 - automatic chanel change
 
