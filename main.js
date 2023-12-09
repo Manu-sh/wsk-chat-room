@@ -2,11 +2,15 @@
 import moment from 'moment';
 import {ChannelChat} from './src/ChannelChat.js';
 
+//import {} from 'jsonwebtoken';
+
 import colors from 'colors';
 colors.enable();
 
+
 // TODO: Redis per la history dei messaggi?
 // TODO: Redis per la gestione dei canali?
+// https://redis.io/docs/connect/clients/nodejs/
 
 // TODO: channel chat per default deve interagire per canali quindi fare il broadcast a quelli nel canale
 /// TODO: prima ancora chat deve decodificare il messaggio

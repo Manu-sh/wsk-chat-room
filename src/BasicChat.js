@@ -13,6 +13,7 @@ export class BasicChat extends WSS {
         super(arg);
         super.onHttpsUpgrade(onHttpsUpgrade);
 
+        // https://nodejs.org/docs/latest-v18.x/api/http.html#class-httpincomingmessage
         this.on('connection', (sk,req) => {
 
             // mixing https://www.w3docs.com/learn-javascript/mixins.html
