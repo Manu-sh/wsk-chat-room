@@ -27,3 +27,31 @@ const server =  createServer({
 ```
 aggiungendo l'opzione -nodes in fondo non è più necessario 
 (`openssl req -new -x509 -keyout key.pem -out crt.pem -nodes`)
+
+
+---
+
+join 2 channel
+- automatic chanel change
+
+```json
+  {
+    "cmd": "join",
+    "channel": "ch1"
+  }
+```
+
+quit from current channel
+```json
+  {
+    "cmd": "quit"
+  }
+```
+
+broadcast message to current channel
+```json
+  {
+    "cmd": "msg",
+    "text": "testo del messaggio" 
+  }
+```
