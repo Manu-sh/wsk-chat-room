@@ -3,6 +3,7 @@ import moment from 'moment';
 import {ChannelChat} from './src/ChannelChat.js';
 
 import jwt from 'jsonwebtoken';
+import env from './src/env.js'
 
 import colors from 'colors';
 colors.enable();
@@ -28,6 +29,18 @@ setInterval(() => {
 }, 3000)
 */
 
+// TODO: here
+const payload = {
+    'test': 'ciao'
+};
+
+const options = {
+    expiresIn: '10s'
+};
+
+const token = jwt.sign(payload, env('JWT_KEY'), options);
+console.log(token);
+// process.exit();
 
 wss.on('chat:client:connected', (client, req) => {
     wss.channels.join(client);
