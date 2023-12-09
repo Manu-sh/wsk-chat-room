@@ -33,9 +33,11 @@ aggiungendo l'opzione -nodes in fondo non è più necessario
 
 ```json
 {
-  "cmd": "login",
-  "user": "user",
-  "passwd": "1"
+    "data": {
+      "cmd": "login",
+      "user": "user",
+      "passwd": "1"
+    }
 }
 ```
 
@@ -43,23 +45,32 @@ join 2 channel
 - automatic chanel change
 
 ```json
-  {
-    "cmd": "join",
-    "channel": "ch1"
+{
+  "auth_token": "xxx",
+  "data": {
+     "cmd": "join",
+     "channel": "ch1"
   }
+}
 ```
 
 quit from current channel
 ```json
-  {
+{
+  "auth_token": "xxx",
+  "data": {
     "cmd": "quit"
   }
+}
 ```
 
 broadcast message to current channel
 ```json
-  {
+{
+  "auth_token": "xxx",
+  "data": {
     "cmd": "msg",
-    "text": "testo del messaggio" 
+    "text": "testo del messaggio"
   }
+}
 ```
