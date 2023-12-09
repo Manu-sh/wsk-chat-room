@@ -8,6 +8,13 @@ export class ChannelChat extends BasicChat {
 
     constructor(...args) {
         super(...args);
+
+        this.on('chat:client:connected', (...args) => {
+            this.once('chat:message:received', (...args) => {
+                this.emit('chat:authentication', ...args);
+            });
+        });
+
     }
 
 }

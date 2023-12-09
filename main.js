@@ -2,6 +2,9 @@
 import moment from 'moment';
 import {ChannelChat} from './src/ChannelChat.js';
 
+import colors from 'colors';
+colors.enable();
+
 // TODO: Redis per la history dei messaggi?
 // TODO: Redis per la gestione dei canali?
 
@@ -10,6 +13,8 @@ import {ChannelChat} from './src/ChannelChat.js';
 const wss = new ChannelChat({
     //path: '/ch1'
 });
+
+// request origin: https://github.com/theturtle32/WebSocket-Node/wiki/How-to%3A-List-all-connected-sessions-&-Communicating-with-a-specific-session-only
 
 /*
 setInterval(() => {
@@ -23,14 +28,9 @@ wss.on('chat:client:connected', (client, req) => {
     wss.channels.join(client);
 });
 
-
-// TODO: gestisce l'autenticazione di un utente una sola volta dopo la connessione
-wss.on('chat:client:connected', (client, req) => {
-
-    wss.once('chat:message:received', (data, isBinary, client) => {
-        //console.log(JSON.parse(data))
-    });
-
+wss.on('chat:authentication', (data, isBinary, client) => {
+    //console.log(JSON.parse(data))
+    console.log(`authentication [${client.id.red}]`);
 });
 
 wss.on('chat:message:received', (data, isBinary, client) => {
