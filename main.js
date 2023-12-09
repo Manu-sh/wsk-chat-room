@@ -2,7 +2,7 @@
 import moment from 'moment';
 import {ChannelChat} from './src/ChannelChat.js';
 
-//import {} from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 import colors from 'colors';
 colors.enable();
