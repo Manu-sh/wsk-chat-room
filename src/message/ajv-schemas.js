@@ -77,10 +77,14 @@ const cmd_msg_schema = {
 };
 
 
-const validate_cmd_login = ajv.compile(cmd_login_schema);
-const validate_cmd_join  = ajv.compile(cmd_join_schema);
-const validate_cmd_quit  = ajv.compile(cmd_quit_schema);
-const validate_cmd_msg   = ajv.compile(cmd_msg_schema);
 
+const validate = {
+    cmd: {
+        login: ajv.compile(cmd_login_schema),
+        join:  ajv.compile(cmd_join_schema),
+        quit:  ajv.compile(cmd_quit_schema),
+        msg:   ajv.compile(cmd_msg_schema),
+    }
+};
 
-export {validate_cmd_login, validate_cmd_join, validate_cmd_msg, validate_cmd_quit};
+export {validate};
