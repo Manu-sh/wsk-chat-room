@@ -24,7 +24,7 @@ const cmd_login_schema = {
 const cmd_join_schema = {
     type: 'object',
     properties: {
-        auth_token: { type: 'string', },
+        auth_token: { type: 'string' },
         data: {
             type: 'object',
             properties: {
@@ -43,7 +43,7 @@ const cmd_join_schema = {
 const cmd_quit_schema = {
     type: 'object',
     properties: {
-        auth_token: { type: 'string', },
+        auth_token: { type: 'string' },
         data: {
             type: 'object',
             properties: {
@@ -61,14 +61,14 @@ const cmd_quit_schema = {
 const cmd_msg_schema = {
     type: 'object',
     properties: {
-        auth_token: { type: 'string', },
+        auth_token: { type: 'string' },
         data: {
             type: 'object',
             properties: {
                 cmd: { type: 'string', const: 'msg' },
-                msg: { type: 'string' },
+                text: { type: 'string' },
             },
-            required: ['cmd', 'msg'],
+            required: ['cmd', 'text'],
             additionalProperties: false
         }
     },

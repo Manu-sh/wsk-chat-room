@@ -55,7 +55,7 @@ wss.on('chat:authentication', (data, isBinary, client) => {
 
 wss.on('chat:message:received', (data, isBinary, client) => {
 
-    const is_valid = validate.cmd.msg(data);
+    const is_valid = validate.cmd.msg(JSON.parse(data));
     if (!is_valid) {
         console.error(validate.cmd.msg.errors);
         return;
