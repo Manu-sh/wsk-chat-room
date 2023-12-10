@@ -24,6 +24,13 @@ export class BasicChat extends WSS {
                 conn_req: req
             };
 
+            // bind authentication event
+            this.on('chat:client:connected', (...args) => {
+                this.once('chat:message:received', (...args) => {
+                    this.emit('chat:authentication', ...args);
+                });
+            });
+
             this.emit('chat:client:connected', sk, req);
 
             sk.on('message', (...args) => {
