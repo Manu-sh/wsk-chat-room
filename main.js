@@ -5,6 +5,8 @@ import {ChannelChat} from './src/ChannelChat.js';
 import jwt from 'jsonwebtoken';
 import env from './src/env.js'
 
+import {validate_cmd_login} from './src/message/ajv-schemas.js';
+
 import colors from 'colors';
 colors.enable();
 
