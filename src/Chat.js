@@ -21,13 +21,13 @@ export class Chat extends BasicChat {
             const payload = { command, client, data, isBinary };
             switch (command.data.cmd) {
                 case 'quit':
-                    this.emit('cmd:disconnect', payload);
+                    this.emit('chat:cmd:disconnect', payload);
                     return;
                 case 'msg':
-                    this.emit('cmd:msg', payload)
+                    this.emit('chat:cmd:msg', payload)
                     return;
                 case 'join':
-                    this.emit('cmd:join', payload)
+                    this.emit('chat:cmd:join', payload)
                     return;
             }
 
