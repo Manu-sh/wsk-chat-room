@@ -7,7 +7,7 @@ import {Chat} from './src/Chat.js';
 
 // TODO: channel chat per default deve interagire per canali quindi fare il broadcast a quelli nel canale
 
-const wss = new Chat({});
+const wss = new Chat();
 
 // request origin: https://github.com/theturtle32/WebSocket-Node/wiki/How-to%3A-List-all-connected-sessions-&-Communicating-with-a-specific-session-only
 
