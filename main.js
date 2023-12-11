@@ -53,7 +53,21 @@ wss.on('chat:authentication', (data, isBinary, client) => {
     console.log(`authentication [${client.id.red}]`);
 });
 
+
+wss.on('cmd:msg', ({command, client, isBinary}) => {
+
+    wss.channels.sendToChannel(
+        client.channel_name,
+        `[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`,
+        { binary: isBinary }
+    );
+})
+
+/*
 wss.on('chat:message:received', (data, isBinary, client) => {
+
+
+
 
     const command = parseCmd(data);
     if (!command.valid) {
@@ -61,14 +75,26 @@ wss.on('chat:message:received', (data, isBinary, client) => {
         return;
     }
 
-    console.log('received: %s...', data.toString().substring(0, 10), isBinary)
+    const type = command.data.cmd;
 
-    wss.channels.sendToChannel(
-        client.channel_name,
-        `[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${data}`,
-        { binary: isBinary }
-    );
+    switch (type) {
+        case 'quit':
+            wss.emit('chat:client:disconnect', 0, 0, client);
+            return;
+        case 'msg':
+            wss.channels.sendToChannel(
+                client.channel_name,
+                `[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`,
+                { binary: isBinary }
+            );
+            return;
+        case 'join':
+            wss.channels.change(client, command.data.channel);
+            return;
+    }
+
 });
+ */
 
 
 // TODO: possibilità di cambiar canale senza disconnettere l'utente
