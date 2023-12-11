@@ -2,7 +2,7 @@
 import {WSS} from './WSS.js';
 import WebSocket from 'ws';
 
-import {ChatUser} from './user/ChatUser.js';
+import {ChatUser} from '../user/ChatUser.js';
 
 export class BasicChat extends WSS {
 

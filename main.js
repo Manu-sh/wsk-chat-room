@@ -1,6 +1,6 @@
 'use strict';
 import moment from 'moment';
-import {Chat} from './src/Chat.js';
+import {Chat} from './src/chat/Chat.js';
 
 // TODO: Redis per la history dei messaggi nei vari canali?
 // https://redis.io/docs/connect/clients/nodejs/

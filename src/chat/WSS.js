@@ -2,7 +2,7 @@
 import {WebSocketServer} from 'ws';
 import {createServer} from 'https';
 import {readFileSync} from 'fs';
-import env from './env.js';
+import env from '../env.js';
 
 /*
 function make_static_https(unset = false) {
