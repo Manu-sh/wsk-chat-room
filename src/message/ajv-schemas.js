@@ -99,4 +99,4 @@ function parseCmd(data) {
     return parseCommand(data?.data?.cmd, data);
 }
 
-export {parseCmd};
+export {validate, parseCmd};
