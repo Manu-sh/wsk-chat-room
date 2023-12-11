@@ -1,14 +1,11 @@
 'use strict';
 import moment from 'moment';
-import {ChannelChat} from './src/ChannelChat.js';
+import {Chat} from './src/Chat.js';
 
 import jwt from 'jsonwebtoken';
 import env from './src/env.js'
 
-import {validate, parseCmd} from './src/message/ajv-schemas.js';
-
-import colors from 'colors';
-colors.enable();
+import {parseCmd} from './src/message/ajv-schemas.js';
 
 
 // TODO: Redis per la history dei messaggi?
@@ -18,9 +15,7 @@ colors.enable();
 // TODO: channel chat per default deve interagire per canali quindi fare il broadcast a quelli nel canale
 /// TODO: prima ancora chat deve decodificare il messaggio
 // bindare l'evento reiceved, quello authenticated etc.
-const wss = new ChannelChat({
-    //path: '/ch1'
-});
+const wss = new Chat({});
 
 // request origin: https://github.com/theturtle32/WebSocket-Node/wiki/How-to%3A-List-all-connected-sessions-&-Communicating-with-a-specific-session-only
 

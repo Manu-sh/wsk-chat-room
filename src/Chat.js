@@ -1,9 +1,9 @@
 'use strict';
 import {BasicChat} from './BasicChat.js'
 import {ChannelManager} from './channel/ChannelManager.js'
-import {parseCmd, validate} from './message/ajv-schemas.js'
+import {parseCmd} from './message/ajv-schemas.js'
 
-export class ChannelChat extends BasicChat {
+export class Chat extends BasicChat {
 
     channels = new ChannelManager();
 
@@ -18,10 +18,7 @@ export class ChannelChat extends BasicChat {
                 return;
             }
 
-            const payload = {
-                command, client, data, isBinary,
-            };
-
+            const payload = { command, client, data, isBinary };
             switch (command.data.cmd) {
                 case 'quit':
                     this.emit('cmd:disconnect', payload);
