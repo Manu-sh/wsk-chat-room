@@ -5,7 +5,7 @@ import {ChannelChat} from './src/ChannelChat.js';
 import jwt from 'jsonwebtoken';
 import env from './src/env.js'
 
-import {validate} from './src/message/ajv-schemas.js';
+import {validate, parseCmd} from './src/message/ajv-schemas.js';
 
 import colors from 'colors';
 colors.enable();
@@ -55,8 +55,8 @@ wss.on('chat:authentication', (data, isBinary, client) => {
 
 wss.on('chat:message:received', (data, isBinary, client) => {
 
-    const is_valid = validate.cmd.msg(JSON.parse(data));
-    if (!is_valid) {
+    const command = parseCmd(data);
+    if (!command.valid) {
         console.error(validate.cmd.msg.errors);
         return;
     }

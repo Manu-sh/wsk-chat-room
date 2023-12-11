@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-const ajv = new Ajv(); // Opzioni possono essere passate come parametro
+const ajv = new Ajv();
 
 const cmd_login_schema = {
     type: 'object',
@@ -84,7 +84,19 @@ const validate = {
         join:  ajv.compile(cmd_join_schema),
         quit:  ajv.compile(cmd_quit_schema),
         msg:   ajv.compile(cmd_msg_schema),
+        nop: (_) => null
     }
 };
 
-export {validate};
+// return a valid json or null
+function parseCommand(type, data) {
+    const cmd = validate.cmd[type ?? 'nop']( data ) ? data : null;
+    return Object.assign({valid: !!cmd}, cmd ?? data);
+}
+
+function parseCmd(data) {
+    data = JSON.parse(data);
+    return parseCommand(data?.data?.cmd, data);
+}
+
+export {validate, parseCmd};
