@@ -8,7 +8,7 @@
           // to the `onopen` property.
           ws.onopen = function() {
 
-              // mock authentication
+              // mock authentication (not yet implemented)
             ws.send(JSON.stringify({
                 data: {
                     cmd: 'login',
