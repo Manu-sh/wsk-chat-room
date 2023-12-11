@@ -84,7 +84,7 @@ const validate = {
         join:  ajv.compile(cmd_join_schema),
         quit:  ajv.compile(cmd_quit_schema),
         msg:   ajv.compile(cmd_msg_schema),
-        nop: (_) => null
+        nop:   _ => null
     }
 };
 
