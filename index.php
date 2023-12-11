@@ -8,6 +8,15 @@
           // to the `onopen` property.
           ws.onopen = function() {
 
+              // mock authentication
+            ws.send(JSON.stringify({
+                data: {
+                    cmd: 'login',
+                    user: '',
+                    passwd: ''
+                }
+            }));
+
             const btn = document.getElementById('send');
             btn.disabled = false;
 
@@ -18,7 +27,15 @@
                 if ((msg_node.value ?? '') === '')
                     return;
 
-                ws.send(msg_node.value);
+                const cmd = {
+                    auth_token: '',
+                    data: {
+                        cmd: 'msg',
+                        text: msg_node.value
+                    }
+                };
+
+                ws.send(JSON.stringify(cmd));
                 msg_node.value = '';
             });
 
