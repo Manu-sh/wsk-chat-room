@@ -74,3 +74,15 @@ broadcast message to current channel
   }
 }
 ```
+
+---
+list channels
+
+```json
+{
+  "auth_token": "xxx",
+  "data": {
+     "cmd": "chls"
+  }
+}
+```
