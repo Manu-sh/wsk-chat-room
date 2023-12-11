@@ -89,9 +89,9 @@ const validate = {
 };
 
 // return a valid json or null
-function parseCommand(type, data) {
-    const cmd = validate.cmd[type ?? 'nop']( data ) ? data : null;
-    return Object.assign({valid: !!cmd}, cmd ?? data);
+function parseCommand(type, json_obj) {
+    const cmd = validate.cmd[type ?? 'nop']( json_obj ) ? json_obj : null;
+    return Object.assign({valid: !!cmd}, cmd ?? json_obj);
 }
 
 function parseCmd(data) {
