@@ -2,8 +2,7 @@
 import moment from 'moment';
 import {Chat} from './src/Chat.js';
 
-// TODO: Redis per la history dei messaggi?
-// TODO: Redis per la gestione dei canali?
+// TODO: Redis per la history dei messaggi nei vari canali?
 // https://redis.io/docs/connect/clients/nodejs/
 
 // TODO: channel chat per default deve interagire per canali quindi fare il broadcast a quelli nel canale
