@@ -8,9 +8,11 @@ export class BasicChat extends WSS {
 
     wss_clients = {};
 
-    constructor(arg) {
+    constructor(arg, onHttpsUpgrade = () => true) {
 
         super(arg);
+        super.onHttpsUpgrade(onHttpsUpgrade);
+
 
         // https://nodejs.org/docs/latest-v18.x/api/http.html#class-httpincomingmessage
         this.on('connection', (sk,req) => {
