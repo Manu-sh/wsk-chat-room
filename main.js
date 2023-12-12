@@ -2,6 +2,7 @@
 import moment from 'moment';
 import {Chat} from './src/chat/Chat.js';
 
+
 // TODO: Redis per la history dei messaggi nei vari canali?
 // https://redis.io/docs/connect/clients/nodejs/
 
@@ -33,6 +34,9 @@ wss.on('chat:cmd:msg', ({command, client}) => {
     wss.channels.sendToChannel(client.channel_name, `[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`);
 });
 
+wss.on('chat:cmd:chls', ({command, client}) => {
+    console.log('chls');
+});
 
 wss.on('chat:client:disconnect', (code, reason, client) => {
     wss.channels.quit(client);

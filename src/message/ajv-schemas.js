@@ -78,12 +78,31 @@ const cmd_msg_schema = {
 
 
 
+const cmd_chls_schema = {
+    type: 'object',
+    properties: {
+        auth_token: { type: 'string' },
+        data: {
+            type: 'object',
+            properties: {
+                cmd: { type: 'string', const: 'chls' }
+            },
+            required: ['cmd'],
+            additionalProperties: false
+        }
+    },
+    required: ['auth_token', 'data'],
+    additionalProperties: false
+};
+
+
 const validate = {
     cmd: {
         login: ajv.compile(cmd_login_schema),
         join:  ajv.compile(cmd_join_schema),
         quit:  ajv.compile(cmd_quit_schema),
         msg:   ajv.compile(cmd_msg_schema),
+        chls:  ajv.compile(cmd_chls_schema),
         nop:   _ => null
     }
 };

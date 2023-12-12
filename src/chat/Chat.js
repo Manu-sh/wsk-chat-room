@@ -29,6 +29,9 @@ export class Chat extends BasicChat {
                 case 'join':
                     this.emit('chat:cmd:join', payload)
                     return;
+                case 'chls':
+                    this.emit('chat:cmd:chls', payload)
+                    return;
             }
 
         });
