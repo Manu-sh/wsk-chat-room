@@ -21,7 +21,7 @@ export class Chat extends BasicChat {
             const payload = { command, client, data, isBinary };
             switch (command.data.cmd) {
                 case 'quit':
-                    this.emit('chat:cmd:disconnect', payload);
+                    this.emit('chat:cmd:quit', payload);
                     return;
                 case 'msg':
                     this.emit('chat:cmd:msg', payload)
