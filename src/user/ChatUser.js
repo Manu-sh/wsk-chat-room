@@ -2,7 +2,7 @@
 
 export class ChatUser {
 
-    static regexp = new RegExp(/^(\/?\?)/);
+    static regexp = /^(\/?\?)/;
 
     id;
     channel_name;
