@@ -17,7 +17,7 @@ export class WSS extends WebSocketServer {
             cert: readFileSync(env('WSS_CRT_PEM_PATH')),
             ca: 'X509 CERTIFICATE',
         });
-        // this.on('connection', (...args) => this.#setupPurger(...args));
+
         this.on('close', () => this.#https_server.close());
     }
 
