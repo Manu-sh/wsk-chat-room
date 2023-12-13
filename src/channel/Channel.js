@@ -33,22 +33,17 @@ export class Channel {
         return !this.count();
     }
 
-    *#activeClients() { // : Iterator<Pair<String,ChatUser>>
-        for (const client of this.clients.values())
-            if (client.readyState === WebSocket.OPEN)
-                yield client;
-    }
-
     *keys() { // : Iterator<String>
         yield *this.clients.keys();
     }
 
-    toArray() { // Array<ChatUser>
-        return [...this.#activeClients()];
+    activeClients() { // Array<ChatUser>
+        return [...this.clients.values()]
+            .filter(client => client.readyState === WebSocket.OPEN);
     }
 
     sendAll(...args) {
-        this.toArray().forEach(client => {
+        this.activeClients().forEach(client => {
             client.send(...args);
         });
     }
