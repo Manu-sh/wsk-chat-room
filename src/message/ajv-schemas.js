@@ -96,6 +96,25 @@ const cmd_chls_schema = {
 };
 
 
+const cmd_lchu_schema = {
+    type: 'object',
+    properties: {
+        auth_token: { type: 'string' },
+        data: {
+            type: 'object',
+            properties: {
+                cmd: { type: 'string', const: 'lchu' },
+                channel: { type: 'string' },
+            },
+            required: ['cmd', 'channel'],
+            additionalProperties: false
+        }
+    },
+    required: ['auth_token', 'data'],
+    additionalProperties: false
+};
+
+
 const validate = {
     cmd: {
         login: ajv.compile(cmd_login_schema),
@@ -103,6 +122,7 @@ const validate = {
         quit:  ajv.compile(cmd_quit_schema),
         msg:   ajv.compile(cmd_msg_schema),
         chls:  ajv.compile(cmd_chls_schema),
+        lchu:  ajv.compile(cmd_lchu_schema),
         nop:   _ => null
     }
 };

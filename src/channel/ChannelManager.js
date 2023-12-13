@@ -16,6 +16,11 @@ export class ChannelManager {
     // Map<String,BasicChannel>
     channels = {};
 
+    get(channel_name) {
+        const ch = this.channels[channel_name]?.it();
+        return ch ?? (new Channel()).it();
+    }
+
     join(client) { // : BasicChannel
         const channel = this.channels[client.channel_name] ??= new Channel(client.channel_name);
         channel.join(client);
@@ -53,7 +58,7 @@ export class ChannelManager {
     }
 
 
-    *it() { // : Iterator<Pair<String,WebSocket>>
+    *keys() { // : Iterator<Pair<String,WebSocket>>
         yield *Object.keys(this.channels);
     }
 

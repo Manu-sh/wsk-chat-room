@@ -86,3 +86,15 @@ list channels
   }
 }
 ```
+
+list channel users
+
+```json
+{
+  "auth_token": "xxx",
+  "data": {
+     "cmd": "lchu",
+     "channel": "ch1"
+  }
+}
+```

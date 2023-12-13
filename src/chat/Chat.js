@@ -24,13 +24,16 @@ export class Chat extends BasicChat {
                     this.emit('chat:cmd:quit', payload);
                     return;
                 case 'msg':
-                    this.emit('chat:cmd:msg', payload)
+                    this.emit('chat:cmd:msg', payload);
                     return;
                 case 'join':
-                    this.emit('chat:cmd:join', payload)
+                    this.emit('chat:cmd:join', payload);
                     return;
                 case 'chls':
-                    this.emit('chat:cmd:chls', payload)
+                    this.emit('chat:cmd:chls', payload);
+                    return;
+                case 'lchu':
+                    this.emit('chat:cmd:lchu', payload);
                     return;
             }
 

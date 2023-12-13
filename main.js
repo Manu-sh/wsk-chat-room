@@ -34,8 +34,16 @@ wss.on('chat:cmd:msg', ({command, client}) => {
     wss.channels.sendToChannel(client.channel_name, `[${client.id}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`);
 });
 
-wss.on('chat:cmd:chls', ({command, client}) => {
-    wss.sendTo(client.id, JSON.stringify([...wss.channels.it()]));
+wss.on('chat:cmd:chls', ({_, client}) => {
+    wss.sendTo(client.id, JSON.stringify([...wss.channels.keys()]));
+});
+
+
+// TODO: here
+wss.on('chat:cmd:lchu', ({command, client}) => {
+    const channel_name = command.data.channel;
+    const channel = wss.channels.get(channel_name);
+    wss.sendTo(client.id, JSON.stringify([...channel.it()]));
 });
 
 wss.on('chat:client:disconnect', (code, reason, client) => {

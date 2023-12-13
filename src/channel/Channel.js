@@ -34,7 +34,7 @@ export class Channel {
     }
 
     *it() { // : Iterator<Pair<String,WebSocket>>
-        yield *Object.keys(this.clients);
+        yield *this.clients.keys();
     }
 
     activeClients() {
