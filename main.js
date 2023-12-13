@@ -36,8 +36,10 @@ wss.on('chat:cmd:msg', ({command, client}) => {
 
 wss.on('chat:cmd:chls', ({command, client}) => {
 
-    for (const channel_name of wss.channels.it())
-        wss.sendTo(client.id, channel_name);
+    //for (const channel_name of wss.channels.it())
+        //wss.sendTo(client.id, channel_name);
+
+    wss.sendTo(client.id, JSON.stringify([...wss.channels.it()]));
 
 });
 
