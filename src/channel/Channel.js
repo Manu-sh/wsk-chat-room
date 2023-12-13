@@ -33,10 +33,6 @@ export class Channel {
         return !this.count();
     }
 
-    *keys() { // : Iterator<String>
-        yield *this.clients.keys();
-    }
-
     activeClients() { // Array<ChatUser>
         return [...this.clients.values()]
             .filter(client => client.readyState === WebSocket.OPEN);
