@@ -35,7 +35,10 @@ wss.on('chat:cmd:msg', ({command, client}) => {
 });
 
 wss.on('chat:cmd:chls', ({command, client}) => {
-    console.log('chls');
+
+    for (const channel_name of wss.channels.it())
+        wss.sendTo(client.id, channel_name);
+
 });
 
 wss.on('chat:client:disconnect', (code, reason, client) => {

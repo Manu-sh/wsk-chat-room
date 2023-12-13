@@ -52,4 +52,10 @@ export class ChannelManager {
                 : Object.keys(this.channels).length;
     }
 
+
+    *it() { // : Iterator<Pair<String,WebSocket>>
+        for (const channel_name of Object.keys(this.channels))
+            yield channel_name;
+    }
+
 }
