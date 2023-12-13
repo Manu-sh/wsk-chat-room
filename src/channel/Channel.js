@@ -8,7 +8,7 @@ import WebSocket from 'ws';
 export class Channel {
 
     name = '';
-    clients = new Map(); // Map<String,WebSocket>
+    clients = new Map(); // Map<String,ChatUser>
 
     constructor(name) {
         this.name = name;
@@ -33,17 +33,22 @@ export class Channel {
         return !this.count();
     }
 
-    *it() { // : Iterator<Pair<String,WebSocket>>
+    *#activeClients() { // : Iterator<Pair<String,ChatUser>>
+        for (const client of this.clients.values())
+            if (client.readyState === WebSocket.OPEN)
+                yield client;
+    }
+
+    *keys() { // : Iterator<String>
         yield *this.clients.keys();
     }
 
-    activeClients() {
-        return [...this.clients.values()]
-            .filter(client => client.readyState === WebSocket.OPEN);
+    toArray() { // Array<ChatUser>
+        return [...this.#activeClients()];
     }
 
     sendAll(...args) {
-        this.activeClients().forEach(client => {
+        this.toArray().forEach(client => {
             client.send(...args);
         });
     }

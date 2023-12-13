@@ -15,7 +15,7 @@ export class ChannelManager {
 
     static DEFAUL_CHANNEL_NAME = 'general';
 
-    // Map<String,BasicChannel>
+    // Map<String,Channel>
     channels = {
         'general': new Channel(ChannelManager.DEFAUL_CHANNEL_NAME)
     };
@@ -24,10 +24,10 @@ export class ChannelManager {
 
     get(channel_name) {
         const ch = this.channels[channel_name];
-        return ch ?? this.channels[ChannelManager.DEFAUL_CHANNEL_NAME];
+        return ch ?? null;
     }
 
-    join(client) { // : BasicChannel
+    join(client) { // : Channel
         const channel = this.channels[client.channel_name] ??= new Channel(client.channel_name);
         channel.join(client);
         return channel;
@@ -66,7 +66,7 @@ export class ChannelManager {
     }
 
 
-    *keys() { // : Iterator<Pair<String,WebSocket>>
+    *keys() { // : Iterator<String>
         yield *Object.keys(this.channels);
     }
 

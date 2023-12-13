@@ -14,7 +14,7 @@ const wss = new Chat();
 
 /*
 setInterval(() => {
-    console.log('client attivi' + wss.activeClients().length);
+    console.log('client attivi' + wss.toArray().length);
     console.log('canali attivi' + wss.channels.count_channels());
 }, 3000)
 */
@@ -43,7 +43,8 @@ wss.on('chat:cmd:chls', ({_, client}) => {
 wss.on('chat:cmd:lchu', ({command, client}) => {
     const channel_name = command.data.channel;
     const channel = wss.channels.get(channel_name);
-    wss.sendTo(client.id, JSON.stringify([...channel.it()]));
+    if (!channel) return;
+    wss.sendTo(client.id, JSON.stringify([...channel.keys()]));
 });
 
 wss.on('chat:client:disconnect', (code, reason, client) => {
