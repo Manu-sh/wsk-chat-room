@@ -1,7 +1,7 @@
 'use strict';
 import {BasicChat} from './BasicChat.js'
 import {ChannelManager} from '../channel/ChannelManager.js'
-import {validate, parseCmd} from '../message/ajv-schemas.js'
+import {validate, parseCmd} from '../command/ajv-schemas.js'
 
 export class Chat extends BasicChat {
 
