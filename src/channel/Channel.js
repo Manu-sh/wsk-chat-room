@@ -33,8 +33,8 @@ export class Channel {
         return !this.count();
     }
 
-    *generator() { // : Iterator<Pair<String,WebSocket>>
-        return this.clients.entries();
+    *it() { // : Iterator<Pair<String,WebSocket>>
+        yield *Object.keys(this.clients);
     }
 
     activeClients() {
