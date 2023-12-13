@@ -1,5 +1,7 @@
 'use strict';
 
+import {ChannelManager} from '../channel/ChannelManager.js'
+
 export class ChatUser {
 
     static regexp = /^(\/?\?)/;
@@ -14,7 +16,7 @@ export class ChatUser {
 
     #setChannelName(channel_name) {
         const res = new URLSearchParams(channel_name.replace(ChatUser.regexp, ''));
-        this.channel_name = res.get('channel') ?? 'general';
+        this.channel_name = res.get('channel') ?? ChannelManager.DEFAUL_CHANNEL_NAME;
     }
 
 

@@ -13,12 +13,18 @@ import {Channel} from './Channel.js'
 
 export class ChannelManager {
 
+    static DEFAUL_CHANNEL_NAME = 'general';
+
     // Map<String,BasicChannel>
-    channels = {};
+    channels = {
+        'general': new Channel(ChannelManager.DEFAUL_CHANNEL_NAME)
+    };
+
+    constructor() {}
 
     get(channel_name) {
-        const ch = this.channels[channel_name]?.it();
-        return ch ?? (new Channel()).it();
+        const ch = this.channels[channel_name];
+        return ch ?? this.channels[ChannelManager.DEFAUL_CHANNEL_NAME];
     }
 
     join(client) { // : BasicChannel
@@ -32,7 +38,9 @@ export class ChannelManager {
         if (!channel) return false;
 
         channel.quit(client);
-        if (channel.empty()) delete this.channels[client.channel_name];
+        if (channel.empty() && channel.name !== ChannelManager.DEFAUL_CHANNEL_NAME)
+            delete this.channels[client.channel_name];
+
         return true;
     }
 
