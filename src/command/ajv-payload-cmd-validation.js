@@ -134,8 +134,10 @@ function parseCommand(type, json_obj) {
 }
 
 function parseCmd(data) {
-    data = JSON.parse(data);
-    return parseCommand(data?.data?.cmd, data);
+    try {
+        data = JSON.parse(data);
+        return parseCommand(data?.data?.cmd, data);
+    } catch { return data; }
 }
 
 export {validate, parseCmd};

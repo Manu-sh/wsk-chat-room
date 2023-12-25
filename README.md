@@ -11,7 +11,7 @@ php -S localhost:8000
 Open the browser and join to a channel (aka. chat-room).
 the default channel is general `http://localhost:8000/?channel=ch1`
 not all commands are implemented by the client side, actually there is no
-login because it's incompleted.
+login because it's uncompleted.
 
 * https://stackoverflow.com/questions/12871565/how-to-create-pem-files-for-https-web-server#12907165
 * https://nodejs.org/docs/latest-v18.x/api/tls.html#tlscreatesecurecontextoptions
