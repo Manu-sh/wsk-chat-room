@@ -15,13 +15,13 @@ export class Channel {
     }
 
     join(client) { // : void
-        this.clients.set(client.id, client);
+        this.clients.set(client.ID, client);
         this.sendAll(`[${client.chat_user.name}] ${moment().format('DD/MM/YYYY HH:mm:ss')} join the channel ${this.name}`);
     }
 
     quit(client) { // : self
         this.sendAll(`[${client.chat_user.name}] ${moment().format('DD/MM/YYYY HH:mm:ss')} left the chat`);
-        this.clients.delete(client.id);
+        this.clients.delete(client.ID);
         return this;
     }
 

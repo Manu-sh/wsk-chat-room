@@ -8,24 +8,32 @@ const generateUsername = () => uniqueNamesGenerator({  // big-donkey
     length: 2
 });
 
+const MySymbol = {
+    setChannelName: Symbol('#setChannelName')
+}
+
 export class ChatUser {
 
-    static regexp = /^(\/?\?)/;
+    static REGEXP = /^(\/?\?)/;
 
-    id;
+    ID;
     channel_name;
     chat_user = {
         name: null
     };
 
     constructor(id, channel_name) {
-        this.id = id;
-        this.#setChannelName(channel_name);
+        Object.defineProperty(this, 'ID', {
+            value: id,
+            writable: false,
+        });
+
+        this[MySymbol.setChannelName](channel_name);
         this.chat_user.name = generateUsername();
     }
 
-    #setChannelName(channel_name) {
-        const res = new URLSearchParams(channel_name.replace(ChatUser.regexp, ''));
+    [MySymbol.setChannelName](channel_name) {
+        const res = new URLSearchParams(channel_name.replace(ChatUser.REGEXP, ''));
         this.channel_name = res.get('channel') ?? ChannelManager.DEFAUL_CHANNEL_NAME;
     }
 

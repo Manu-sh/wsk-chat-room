@@ -6,7 +6,7 @@ import {ChatUser} from '../user/ChatUser.js';
 
 export class BasicChat extends WSS {
 
-    wss_clients = {};
+    wss_clients = {}; // faster client search
 
     constructor(arg, onHttpsUpgrade = () => true) {
 
@@ -19,8 +19,12 @@ export class BasicChat extends WSS {
 
             // mixing https://www.w3docs.com/learn-javascript/mixins.html
             Object.assign(sk, new ChatUser(req.headers['sec-websocket-key'], req.url));
+            Object.defineProperty(sk, 'id', { // id readonly
+                value: sk.ID,
+                writable: false,
+            });
 
-            this.wss_clients[ sk.id ] = {
+            this.wss_clients[ sk.ID ] = {
                 sk: sk,
                 conn_req: req
             };
@@ -40,7 +44,7 @@ export class BasicChat extends WSS {
             });
 
             sk.on('close', (...args) => {
-                delete this.wss_clients[sk.id];
+                delete this.wss_clients[sk.ID];
                 this.emit('chat:client:disconnect', ...[...args, sk])
             });
 

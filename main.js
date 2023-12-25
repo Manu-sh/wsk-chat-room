@@ -25,7 +25,7 @@ wss.on('chat:client:connected', (client) => {
 
 
 wss.on('chat:authentication', (data, isBinary, client) => {
-    // console.log(`authentication [${client.id.red}]`);
+    // console.log(`authentication [${client.ID.red}]`);
 });
 
 
@@ -34,7 +34,7 @@ wss.on('chat:cmd:msg', ({command, client}) => {
 });
 
 wss.on('chat:cmd:chls', ({_, client}) => {
-    wss.sendTo(client.id, JSON.stringify([...wss.channels.keys()]));
+    wss.sendTo(client.ID, JSON.stringify([...wss.channels.keys()]));
 });
 
 
@@ -43,8 +43,8 @@ wss.on('chat:cmd:lchu', ({command, client}) => {
     const channel_name = command.data.channel;
     const channel = wss.channels.get(channel_name);
     if (!channel) return;
-    //wss.sendTo(client.id, JSON.stringify(channel.activeClients().map(c => c.id)));
-    wss.sendTo(client.id, JSON.stringify(channel.activeClients().map(c => c.chat_user.name)));
+    //wss.sendTo(client.ID, JSON.stringify(channel.activeClients().map(c => c.ID)));
+    wss.sendTo(client.ID, JSON.stringify(channel.activeClients().map(c => c.chat_user.name)));
 });
 
 wss.on('chat:client:disconnect', (code, reason, client) => {
