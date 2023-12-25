@@ -14,12 +14,14 @@ export class ChatUser {
 
     id;
     channel_name;
-    user = { name: null };
+    chat_user = {
+        name: null
+    };
 
     constructor(id, channel_name) {
         this.id = id;
         this.#setChannelName(channel_name);
-        this.user.name = generateUsername();
+        this.chat_user.name = generateUsername();
     }
 
     #setChannelName(channel_name) {

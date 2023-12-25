@@ -30,7 +30,7 @@ wss.on('chat:authentication', (data, isBinary, client) => {
 
 
 wss.on('chat:cmd:msg', ({command, client}) => {
-    wss.channels.sendToChannel(client.channel_name, `[${client.user.name}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`);
+    wss.channels.sendToChannel(client.channel_name, `[${client.chat_user.name}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`);
 });
 
 wss.on('chat:cmd:chls', ({_, client}) => {
@@ -44,7 +44,7 @@ wss.on('chat:cmd:lchu', ({command, client}) => {
     const channel = wss.channels.get(channel_name);
     if (!channel) return;
     //wss.sendTo(client.id, JSON.stringify(channel.activeClients().map(c => c.id)));
-    wss.sendTo(client.id, JSON.stringify(channel.activeClients().map(c => c.user.name)));
+    wss.sendTo(client.id, JSON.stringify(channel.activeClients().map(c => c.chat_user.name)));
 });
 
 wss.on('chat:client:disconnect', (code, reason, client) => {
