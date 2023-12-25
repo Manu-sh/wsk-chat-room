@@ -8,7 +8,7 @@ const generateUsername = () => uniqueNamesGenerator({  // big-donkey
     length: 2
 });
 
-const MySymbol = {
+const ChatUserSymbol = {
     setChannelName: Symbol('#setChannelName')
 }
 
@@ -28,11 +28,11 @@ export class ChatUser {
             writable: false,
         });
 
-        this[MySymbol.setChannelName](channel_name);
+        this[ChatUserSymbol.setChannelName](channel_name);
         this.chat_user.name = generateUsername();
     }
 
-    [MySymbol.setChannelName](channel_name) {
+    [ChatUserSymbol.setChannelName](channel_name) {
         const res = new URLSearchParams(channel_name.replace(ChatUser.REGEXP, ''));
         this.channel_name = res.get('channel') ?? ChannelManager.DEFAUL_CHANNEL_NAME;
     }
