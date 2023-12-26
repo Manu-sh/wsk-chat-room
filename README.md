@@ -1,4 +1,4 @@
-# wbsk-chat-room
+# wsk-chat-room
 WSS chat room server - without authentication
 
 future events(?)
