@@ -15,33 +15,32 @@ export class BasicChat extends WSS {
 
 
         // https://nodejs.org/docs/latest-v18.x/api/http.html#class-httpincomingmessage
-        this.on('connection', (sk,req) => {
+        this.on('connection', (client, req) => {
 
             // mixing https://www.w3docs.com/learn-javascript/mixins.html
-            mix(sk, new ChatUser(req.headers['sec-websocket-key'], req.url))
-            //data(sk).ID = null;
-            this.wss_clients[ data(sk).ID ] = {
-                sk: sk,
+            mix(client, new ChatUser(req.headers['sec-websocket-key'], req.url))
+            this.wss_clients[ data(client).ID ] = {
+                client,
                 conn_req: req
             };
 
-            this.emit('chat:client:connected', sk, req);
+            this.emit('chat:client:connected', client, req);
 
             // bind authentication event
-            sk.once('message', (...args) => {
+            client.once('message', (...args) => {
 
                 // fire the authentication event
-                this.emit('chat:authentication', ...[...args, sk]);
+                this.emit('chat:authentication', ...[...args, client]);
 
                 // ignore the first message event which contain the authentication message
-                sk.on('message', (...args) => {
-                    this.emit('chat:message:received', ...[...args, sk]);
+                client.on('message', (...args) => {
+                    this.emit('chat:message:received', ...[...args, client]);
                 });
             });
 
-            sk.on('close', (...args) => {
-                delete this.wss_clients[sk.ID];
-                this.emit('chat:client:disconnect', ...[...args, sk])
+            client.on('close', (...args) => {
+                delete this.wss_clients[data(client).ID];
+                this.emit('chat:client:disconnect', ...[...args, client])
             });
 
         });
@@ -54,7 +53,7 @@ export class BasicChat extends WSS {
     }
 
     sendTo(client_id, ...args) {
-        const client = this.wss_clients[client_id]?.sk;
+        const client = this.wss_clients[client_id]?.client;
         client.send(...args);
     }
 

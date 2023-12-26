@@ -44,8 +44,8 @@ wss.on('chat:cmd:lchu', ({command, client}) => {
     const channel_name = command.data.channel;
     const channel = wss.channels.get(channel_name);
     if (!channel) return;
-    //wss.sendTo(data(client).ID, JSON.stringify(channel.activeClients().map(c => data(c).ID)));
-    wss.sendTo(data(client).ID, JSON.stringify(channel.activeClients().map(c => data(c).username)));
+    //wss.sendTo(data(client).ID, JSON.stringify(channel.activeClients().map(client => data(client).ID)));
+    wss.sendTo(data(client).ID, JSON.stringify(channel.activeClients().map(client => data(client).username)));
 });
 
 wss.on('chat:client:disconnect', (code, reason, client) => {
