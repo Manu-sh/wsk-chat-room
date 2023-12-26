@@ -1,5 +1,5 @@
-# websk-echo-minimal
-WSS echo server - without authentication
+# wbsk-chat-room
+WSS chat room server - without authentication
 
 future events(?)
 | Event                    | Alternate Name                    | Description                              |
