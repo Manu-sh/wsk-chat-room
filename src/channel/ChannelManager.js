@@ -2,15 +2,6 @@
 import {Channel} from './Channel.js'
 import {data} from '../user/ChatUser.js'
 
-/*
-    // TODO: weak-reference to clients?
-    {
-        'clients' => [xx, yy, zz, nn, kk]
-        'ch1' => [xx, yy, zz],
-        'ch2' => [xx, nn, kk],
-    }
-*/
-
 
 export class ChannelManager {
 

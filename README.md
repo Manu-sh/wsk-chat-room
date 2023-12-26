@@ -1,6 +1,16 @@
 # websk-echo-minimal
 WSS echo server - without authentication
 
+future events(?)
+```text
+channel:join:after   - before user joined the channel
+channel:quit:before  - before user leave the channel
+
+channel:open:after   - after channel is created
+channel:close:before - before channel is destroyed
+```
+
+
 https://stackoverflow.com/questions/20088/is-there-a-way-to-make-firefox-ignore-invalid-ssl-certificates
 
 ```shell
