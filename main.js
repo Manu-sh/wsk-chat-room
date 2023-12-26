@@ -1,7 +1,7 @@
 'use strict';
 import moment from 'moment';
 import {Chat} from './src/chat/Chat.js';
-import {Sym} from './src/user/ChatUser.js'
+import {data} from './src/user/ChatUser.js'
 
 
 
@@ -26,16 +26,16 @@ wss.on('chat:client:connected', (client) => {
 
 
 wss.on('chat:authentication', (data, isBinary, client) => {
-    // console.log(`authentication [${client.ID.red}]`);
+    // console.log(`authentication [${data(client).ID.red}]`);
 });
 
 
 wss.on('chat:cmd:msg', ({command, client}) => {
-    wss.channels.sendToChannel(client.channel_name, `[${client[Sym.username]}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`);
+    wss.channels.sendToChannel(data(client).channel_name, `[${data(client).username}] ${moment().format('DD/MM/YYYY HH:mm:ss')} -> ${command.data.text}`);
 });
 
 wss.on('chat:cmd:chls', ({_, client}) => {
-    wss.sendTo(client.ID, JSON.stringify([...wss.channels.keys()]));
+    wss.sendTo(data(client).ID, JSON.stringify([...wss.channels.keys()]));
 });
 
 
@@ -44,8 +44,8 @@ wss.on('chat:cmd:lchu', ({command, client}) => {
     const channel_name = command.data.channel;
     const channel = wss.channels.get(channel_name);
     if (!channel) return;
-    //wss.sendTo(client.ID, JSON.stringify(channel.activeClients().map(c => c.ID)));
-    wss.sendTo(client.ID, JSON.stringify(channel.activeClients().map(c => c[Sym.username])));
+    //wss.sendTo(data(client).ID, JSON.stringify(channel.activeClients().map(c => data(c).ID)));
+    wss.sendTo(data(client).ID, JSON.stringify(channel.activeClients().map(c => data(c).username)));
 });
 
 wss.on('chat:client:disconnect', (code, reason, client) => {

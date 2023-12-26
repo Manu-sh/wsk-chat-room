@@ -2,7 +2,7 @@
 import {WSS} from './WSS.js';
 import WebSocket from 'ws';
 
-import {ChatUser} from '../user/ChatUser.js';
+import {ChatUser, data, mix} from '../user/ChatUser.js';
 
 export class BasicChat extends WSS {
 
@@ -18,13 +18,9 @@ export class BasicChat extends WSS {
         this.on('connection', (sk,req) => {
 
             // mixing https://www.w3docs.com/learn-javascript/mixins.html
-            Object.assign(sk, new ChatUser(req.headers['sec-websocket-key'], req.url));
-            Object.defineProperty(sk, 'id', { // id readonly
-                value: sk.ID,
-                writable: false,
-            });
-
-            this.wss_clients[ sk.ID ] = {
+            mix(sk, new ChatUser(req.headers['sec-websocket-key'], req.url))
+            //data(sk).ID = null;
+            this.wss_clients[ data(sk).ID ] = {
                 sk: sk,
                 conn_req: req
             };

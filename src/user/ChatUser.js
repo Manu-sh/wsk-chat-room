@@ -8,21 +8,30 @@ const generateUsername = () => uniqueNamesGenerator({  // big-donkey
     length: 2
 });
 
+
 const Sym = {
-    setChannelName: Symbol('#setChannelName'),
-    username:       Symbol('username'),
+    data: Symbol('data')
 }
 
+export const data = (client) => {
+    return client[Sym.data];
+};
+
+export const mix = (client, instance) => {
+    client[Sym.data] = instance;
+    Object.defineProperty(client, Sym.data, {writable: false});
+};
+
+
+// comunque poi tutto il resto andrà tolto perché i dati verranno o da una mappa dei client online globale o da redis
+// quindi l'username sarà acceduto così users[client.id].user oppure redis.get(client.id).user
 export class ChatUser {
 
     static REGEXP = /^(\/?\?)/;
 
     ID;
     channel_name;
-
-    // comunque poi tutto il resto andrà tolto perché i dati verranno o da una mappa dei client online globale o da redis
-    // quindi l'username sarà acceduto così users[client.id].user oppure redis.get(client.id).user
-    [Sym.username];
+    username;
 
     constructor(id, channel_name) {
         Object.defineProperty(this, 'ID', {
@@ -30,11 +39,11 @@ export class ChatUser {
             writable: false,
         });
 
-        this[Sym.setChannelName](channel_name);
-        this[Sym.username] = generateUsername();
+        this.#setChannelName(channel_name);
+        this.username = generateUsername();
     }
 
-    [Sym.setChannelName](channel_name) {
+    #setChannelName(channel_name) {
         const res = new URLSearchParams(channel_name.replace(ChatUser.REGEXP, ''));
         this.channel_name = res.get('channel') ?? ChannelManager.DEFAUL_CHANNEL_NAME;
     }

@@ -4,7 +4,7 @@
 
 import moment from 'moment'
 import WebSocket from 'ws';
-import {Sym} from '../user/ChatUser.js';
+import {data} from '../user/ChatUser.js';
 
 export class Channel {
 
@@ -16,13 +16,13 @@ export class Channel {
     }
 
     join(client) { // : void
-        this.clients.set(client.ID, client);
-        this.sendAll(`[${client[Sym.username]}] ${moment().format('DD/MM/YYYY HH:mm:ss')} join the channel ${this.name}`);
+        this.clients.set(data(client).ID, client);
+        this.sendAll(`[${data(client).username}] ${moment().format('DD/MM/YYYY HH:mm:ss')} join the channel ${this.name}`);
     }
 
     quit(client) { // : self
-        this.sendAll(`[${client[Sym.username]}] ${moment().format('DD/MM/YYYY HH:mm:ss')} left the chat`);
-        this.clients.delete(client.ID);
+        this.sendAll(`[${data(client).username}] ${moment().format('DD/MM/YYYY HH:mm:ss')} left the chat`);
+        this.clients.delete(data(client).ID);
         return this;
     }
 
