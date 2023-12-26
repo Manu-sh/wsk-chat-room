@@ -1,6 +1,7 @@
 'use strict';
-import {Channel} from './Channel.js'
-import {data} from '../user/ChatUser.js'
+
+import {Channel} from './Channel.js';
+import {data} from '../chat/common/wss-property-proxy.js';
 
 
 export class ChannelManager {

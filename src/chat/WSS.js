@@ -1,4 +1,5 @@
 'use strict';
+
 import {WebSocketServer} from 'ws';
 import {createServer} from 'https';
 import {readFileSync} from 'fs';

@@ -1,6 +1,6 @@
 'use strict';
-import {BasicChat} from './BasicChat.js'
-import {ChannelManager} from '../channel/ChannelManager.js'
+import {BasicChat} from './BasicChat.js';
+import {ChannelManager} from '../channel/ChannelManager.js';
 import {validate, parseCmd} from '../command/ajv-payload-cmd-validation.js';
 
 export class Chat extends BasicChat {

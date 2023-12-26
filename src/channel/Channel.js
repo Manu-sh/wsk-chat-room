@@ -1,12 +1,11 @@
 'use strict';
 
-// 'ch1' => [xx, yy, zz]
-
-import moment from 'moment'
+import moment from 'moment';
 import WebSocket from 'ws';
-import {data} from '../user/ChatUser.js';
+import {data} from '../chat/common/wss-property-proxy.js';
 
-export class Channel {
+
+export class Channel { // 'ch1' => [xx, yy, zz]
 
     name = '';
     clients = new Map(); // Map<String,ChatUser>

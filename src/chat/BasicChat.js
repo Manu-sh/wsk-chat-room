@@ -2,7 +2,8 @@
 import {WSS} from './WSS.js';
 import WebSocket from 'ws';
 
-import {ChatUser, data, mix} from '../user/ChatUser.js';
+import {ChatUser} from '../user/ChatUser.js';
+import {data, mix} from './common/wss-property-proxy.js';
 
 export class BasicChat extends WSS {
 
