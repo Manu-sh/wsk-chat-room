@@ -3,11 +3,11 @@ WSS echo server - without authentication
 
 future events(?)
 ```text
-channel:join:after   - before user joined the channel
-channel:quit:before  - before user leave the channel
+chat:channel:join:after   - before user joined the channel
+chat:channel:quit:before  - before user leave the channel
 
-channel:open:after   - after channel is created
-channel:close:before - before channel is destroyed
+chat:channel:open:after   - after channel is created
+chat:channel:close:before - before channel is destroyed
 ```
 
 
