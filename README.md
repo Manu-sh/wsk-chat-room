@@ -2,13 +2,13 @@
 WSS echo server - without authentication
 
 future events(?)
-```text
-chat:channel:join:after   - before user joined the channel
-chat:channel:quit:before  - before user leave the channel
+| Event                    | Alternate Name                    | Description                              |
+|--------------------------|-----------------------------------|------------------------------------------|
+| chat:channel:joined      | ~~chat:channel:join:after~~        | After the user has joined the channel   |
+| chat:channel:quitting    | ~~chat:channel:quit:before~~       | Before the user leaves the channel      |
+| chat:channel:created     | ~~chat:channel:created:after~~     | After the channel is created            |
+| chat:channel:closing     | ~~chat:channel:close:before~~      | Before the channel is destroyed         |
 
-chat:channel:open:after   - after channel is created
-chat:channel:close:before - before channel is destroyed
-```
 
 
 https://stackoverflow.com/questions/20088/is-there-a-way-to-make-firefox-ignore-invalid-ssl-certificates
