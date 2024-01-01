@@ -113,3 +113,20 @@ list channel users
   }
 }
 ```
+
+### Future
+
+* JWT
+* Redis / MongoDB / Sequelize
+
+```js
+const payload = {
+    'test': 'hello'
+};
+
+const options = {
+    expiresIn: '10s'
+};
+
+const token = jwt.sign(payload, env('JWT_KEY'), options);
+```
