@@ -83,7 +83,7 @@ join 2 channel
 
 ```json
 {
-  "auth_token": "xxx",
+  "auth_token": "NOT YET IMPLEMENTED",
   "data": {
      "cmd": "join",
      "channel": "ch1"
@@ -94,7 +94,7 @@ join 2 channel
 quit from current channel
 ```json
 {
-  "auth_token": "xxx",
+  "auth_token": "NOT YET IMPLEMENTED",
   "data": {
     "cmd": "quit"
   }
@@ -104,7 +104,7 @@ quit from current channel
 broadcast message to current channel
 ```json
 {
-  "auth_token": "xxx",
+  "auth_token": "NOT YET IMPLEMENTED",
   "data": {
     "cmd": "msg",
     "text": "testo del messaggio"
@@ -117,7 +117,7 @@ list channels
 
 ```json
 {
-  "auth_token": "xxx",
+  "auth_token": "NOT YET IMPLEMENTED",
   "data": {
      "cmd": "chls"
   }
@@ -128,7 +128,7 @@ list channel users
 
 ```json
 {
-  "auth_token": "xxx",
+  "auth_token": "NOT YET IMPLEMENTED",
   "data": {
      "cmd": "lchu",
      "channel": "ch1"
