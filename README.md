@@ -1,7 +1,27 @@
 # wsk-chat-room
 WSS chat room server - without authentication
 
-future events(?)
+
+
+### Future
+
+* JWT
+* Redis / MongoDB / Sequelize
+
+```js
+const payload = {
+    'test': 'hello'
+};
+
+const options = {
+    expiresIn: '10s'
+};
+
+const token = jwt.sign(payload, env('JWT_KEY'), options);
+```
+
+#### future events (?)
+
 | Event                    | Alternate Name                    | Description                              |
 |--------------------------|-----------------------------------|------------------------------------------|
 | chat:channel:joined      | ~~chat:channel:join:after~~        | After the user has joined the channel   |
@@ -10,6 +30,8 @@ future events(?)
 | chat:channel:closing     | ~~chat:channel:close:before~~      | Before the channel is destroyed         |
 
 
+
+## Run
 
 https://stackoverflow.com/questions/20088/is-there-a-way-to-make-firefox-ignore-invalid-ssl-certificates
 
@@ -112,21 +134,4 @@ list channel users
      "channel": "ch1"
   }
 }
-```
-
-### Future
-
-* JWT
-* Redis / MongoDB / Sequelize
-
-```js
-const payload = {
-    'test': 'hello'
-};
-
-const options = {
-    expiresIn: '10s'
-};
-
-const token = jwt.sign(payload, env('JWT_KEY'), options);
 ```
