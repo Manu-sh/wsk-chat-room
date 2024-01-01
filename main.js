@@ -25,6 +25,10 @@ wss.on('chat:client:connected', (client) => {
 
 wss.on('chat:authentication', (data, isBinary, client) => {
     // console.log(`authentication [${data(client).ID.red}]`);
+
+    // treats authentication step as a normal message rather than as THE first message
+    // (which in the future would have the role of authenticating the client)
+    wss.emit('chat:message:received', data, isBinary, client)
 });
 
 
