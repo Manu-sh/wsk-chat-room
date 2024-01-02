@@ -49,6 +49,8 @@ login because it's uncompleted.
 * https://nodejs.org/docs/latest-v18.x/api/tls.html#tlscreatesecurecontextoptions
 * https://nodejs.org/docs/latest-v18.x/api/tls.html#tlsconnectoptions-callback
 * https://www.geeksforgeeks.org/how-to-create-https-server-with-node-js/
+* https://stackoverflow.com/questions/20088/is-there-a-way-to-make-firefox-ignore-invalid-ssl-certificates
+* https://quickstarts.postman.com/guide/websockets-node/index.html?index=..%2F..index#2
 
 Se la chiave è generata con questo comando `openssl req -new -x509 -keyout key.pem -out crt.pem`
 la chiave privata è cifrata e serve passare il parametro `passphrase` specificando la password fornita.
